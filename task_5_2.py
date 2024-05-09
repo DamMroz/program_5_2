@@ -45,12 +45,12 @@ class Series(Movie):
         return (f"{self.title} S{int(self.season):02d}E{int(self.episode):02d}")
 
 
-Series_1 = Series("Season 1", "Episode 4","Breaking Bad", "2008", "Drama")
-Film_1 = Film("The Green Mile", "1999","Fantasy")
-Film_2 = Film("Forrest Gump","1994", "Comedy")
-Series_2 = Series("Season 1", "Episode 5","The Sopranos","1999","Drama")
+series_1 = Series("Season 1", "Episode 4","Breaking Bad", "2008", "Drama")
+film_1 = Film("The Green Mile", "1999","Fantasy")
+film_2 = Film("Forrest Gump","1994", "Comedy")
+series_2 = Series("Season 1", "Episode 5","The Sopranos","1999","Drama")
 
-library: list[Movie] = [Series_1, Film_1, Film_2, Series_2]
+library: list[Movie] = [series_1, film_1, film_2, series_2]
 
 
 def generate_views(library: list[Movie], n=10):
@@ -62,21 +62,21 @@ def generate_views(library: list[Movie], n=10):
             movie.play() 
            
 
-def get_movies():
+def get_movies(library):
     for element in library:
         if isinstance(element,Film):
             details=element.information_movies()
             print(details)
 
 
-def get_series():
+def get_series(library):
     for element in library:
         if isinstance(element,Series):
             details=element.information_series()
             print(details)
 
 
-def search(title):
+def search(title,library):
     for element in library:
         details=element.title
         if title == details and isinstance(element,Film)==True:
@@ -87,7 +87,7 @@ def search(title):
             print(details)
 
 
-def top_titles():
+def top_titles(library):
     view_collection = []
     for element in library:
         view_collection.append((element.views,element.title))
@@ -102,13 +102,13 @@ generate_views(library)
 
 print("Biblioteka filmów")
 
-get_movies()
+get_movies(library)
 
-get_series()
+get_series(library)
 
-top_titles()
+top_titles(library)
 
 
 if __name__ == "__main__":
     title=input("Provide title: ")
-    search(title)
+    search(title,library)
